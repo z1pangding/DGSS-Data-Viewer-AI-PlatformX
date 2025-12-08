@@ -1,0 +1,35 @@
+/* 专门用于修复表格单元格显示的补充CSS */
+
+/* 修复表格行重叠问题 */
+tr {
+    position: relative;
+    z-index: auto;
+    background-color: var(--bg-color);
+}
+
+/* 优化表格单元格内容显示，支持自动换行 */
+td {
+    white-space: pre-wrap !important;
+    /* 允许换行，保留连续空格 */
+    word-wrap: break-word !important;
+    /* 长单词自动断行 */
+    word-break: break-word !important;
+    /* 确保在边界断开 */
+    overflow-wrap: break-word !important;
+    /* CSS3标准属性 */
+    vertical-align: top !important;
+    /* 内容从顶部对齐 */
+}
+
+/* 表头特殊样式 */
+th {
+    background-color: var(--bg-color);
+    font-weight: 600;
+    color: var(--text-primary);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    box-shadow: 0 1px 0 var(--border-color);
+    white-space: nowrap;
+    /* 表头保持单行 */
+}

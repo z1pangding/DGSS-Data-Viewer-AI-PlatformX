@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGSS野外手图数据管理平台</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_fix.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='ai_style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='LOGO.png') }}" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-header">
+                    <h1>DGSS野外手图数据管理平台</h1>
+                    <div class="theme-toggle-container">
+                        <button id="themeToggle" class="icon-btn" title="切换主题">
+                            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="path-input-container">
+                <input type="text" id="folderPath" placeholder="选择数据文件夹..." autocomplete="off">
+                <button id="browseBtn" title="浏览文件夹">📂</button>
+                <button id="scanBtn">扫描</button>
+                <button id="toggleAiBtn" title="切换 AI 助手">🤖 Ai</button>
+            </div>
+
+            <div class="sidebar-tabs">
+                <button class="tab-btn active" id="tabGeological">地质数据</button>
+                <button class="tab-btn" id="tabRawFiles">原始文件</button>
+            </div>
+
+            <div class="file-list" id="fileList">
+                <!-- Categories will be injected here -->
+                <div class="empty-state">未选择文件夹</div>
+            </div>
+        </aside>
+
+        <main class="content-area">
+            <!-- 标签页容器 -->
+            <div class="tabs-container" id="tabsContainer">
+                <div class="tabs" id="tabsList">
+                    <!-- 标签页将动态添加到这里 -->
+                </div>
+            </div>
+            <header class="top-bar">
+                <div class="current-file">
+                    <span id="fileName">选择一个文件</span>
+                    <div id="tableList" class="table-list"></div>
+                    <button id="saveBtn" class="save-btn">保存更改</button>
+                </div>
+                <div class="status-indicator" id="status">就绪</div>
+            </header>
+
+            <div class="data-container" id="dataContainer">
+                <div class="placeholder-content">
+                    <div class="developer-card">
+                        <div class="dev-header">
+                            <div class="icon">📂</div>
+                            <h2>DGSS野外手图数据管理平台</h2>
+                        </div>
+
+                        <div class="dev-content-body">
+                            <div class="dev-info-side">
+                                <div class="info-item">
+                                    <span class="label">开发单位</span>
+                                    <span class="value">浙江省宁波地质院 基础地质调查研究中心</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">开发者</span>
+                                    <span class="value">丁正鹏</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">联系方式</span>
+                                    <span class="value">zhengpengding@outlook.com</span>
+                                </div>
+                            </div>
+
+                            <div class="divider-vertical"></div>
+
+                            <div class="dev-donation-side">
+                                <img src="{{ url_for('static', filename='recived_money.png') }}" alt="Support"
+                                    class="donation-image">
+                                <p class="donation-hint">如果觉得好用话，请作者喝杯☕吧！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="ai-panel" id="aiPanel">
+            <div class="ai-header">
+                <div class="ai-title">
+                    <span class="status-dot" id="aiStatusDot" title="检查服务中..."></span>
+                    AI 地质助手
+                </div>
+            </div>
+
+            <div class="model-selector">
+                <select id="modelSelect" class="model-select" disabled>
+                    <option value="">正在连接 Ollama...</option>
+                </select>
+            </div>
+
+            <div class="chat-container" id="chatContainer">
+                <div class="message ai system">
+                    欢迎使用 AI 地质助手。请确保本地 Ollama 服务已启动 (11434端口)。
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <textarea id="chatInput" class="chat-input" placeholder="输入指令，例如：把R1路线的点都改成花岗岩..." rows="1"
+                    disabled></textarea>
+                <button id="sendBtn" class="send-btn" disabled>
+                    ➤
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ollama_client.js') }}"></script>
+</body>
+
+</html>

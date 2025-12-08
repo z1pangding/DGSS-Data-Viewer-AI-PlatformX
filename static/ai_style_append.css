@@ -1,0 +1,99 @@
+/* Confirmation Card Styles */
+.confirmation-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px;
+    margin-top: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-list {
+    max-height: 150px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 4px;
+    padding: 6px;
+    margin-bottom: 10px;
+}
+
+.action-item {
+    font-size: 12px;
+    padding: 4px;
+    border-bottom: 1px dashed var(--border-color);
+    display: flex;
+    gap: 6px;
+}
+
+.action-item:last-child {
+    border-bottom: none;
+}
+
+.action-badge {
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+}
+
+.badge-UPDATE {
+    background-color: #2196F3;
+}
+
+.badge-INSERT {
+    background-color: #4CAF50;
+}
+
+.badge-DELETE {
+    background-color: #F44336;
+}
+
+.action-details {
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.card-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-confirm {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1;
+    font-size: 12px;
+    transition: opacity 0.2s;
+}
+
+.btn-cancel {
+    background: #9e9e9e;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1;
+    font-size: 12px;
+    transition: opacity 0.2s;
+}
+
+.btn-confirm:hover,
+.btn-cancel:hover {
+    opacity: 0.9;
+}
