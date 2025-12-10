@@ -1,5 +1,7 @@
 # DGSS Data Viewer & AI Platform (DGSS交互平台)
-
+下载地址：『来自123云盘用户ZHENGPENGDI的分享』DGSS野外手图数据Ai智能管理平台.rar
+链接：https://www.123865.com/s/x0h6Vv-UYSRh?pwd=7777#
+提取码：7777
 ## 📖 项目简介 (Introduction)
 
 **DGSS Data Viewer & AI Platform** 是一个专为 **数字地质调查系统 (DGSS)** 设计的现代化数据交互与管理工具。
